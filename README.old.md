@@ -1,8 +1,3 @@
-To run,
-  yarn start
-
-NOTE, Behance servers do not accept CORS requests. To run this application locally, you'll need to work around this. I used [Moesif Origin & CORS Changer] (https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc).
-
 # Dealer Inspire Front End Code Challenge
 
 Hey - welcome to the Dealer Inspire Javascript Code challenge.  We're glad you're here.
