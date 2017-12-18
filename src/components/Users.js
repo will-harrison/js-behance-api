@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import User from './User';
+import User from './UserCard';
 
 const Users = ({ users }) => {
   return (

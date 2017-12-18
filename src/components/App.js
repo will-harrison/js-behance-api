@@ -36,6 +36,7 @@ class App extends Component {
 }
 
 const Container = styled.div.attrs({ className: "avenir" }) `
+  min-height: 100vh;
   border-top: 5px solid #336699;
   border-bottom: 3px solid #336699;
 `;

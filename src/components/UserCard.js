@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-const onUserClick = (id) => {
-  console.log(id)
-}
-
-const User = ({ user }) => {
-  return (
-    <UserContainer onClick={() => onUserClick(user.id)}>
-      <Img src={user.images[100]} alt={user.display_name} />
-      <UserDetail>
-        <Name>{user.display_name}</Name>
-        <div>{user.occupation}</div>
-        <div>{user.city}, {user.country}</div>
-        <a href={user.website}>{user.website}</a>
-      </UserDetail>
-    </UserContainer>
-  );
+class UserCard extends Component {
+  render() {
+    let { user } = this.props;
+    return (
+      <UserContainer onClick={() => this.props.history.push(`/users/${user.username}`)}>
+        <Img src={user.images["100"]} alt={user.display_name} />
+        <UserDetail>
+          <Name>{user.display_name}</Name>
+          <div>{user.occupation}</div>
+          <div>{user.city}, {user.country}</div>
+          <a href={user.website}>{user.website}</a>
+        </UserDetail>
+      </UserContainer>
+    );
+  }
 };
 
 // slight blur on text during transition...
@@ -58,4 +57,4 @@ const Img = styled.img`
 const Name = styled.div.attrs({ className: "f3" }) ``;
 const Country = styled.div``;
 
-export default User;
+export default withRouter(UserCard);
