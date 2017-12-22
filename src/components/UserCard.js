@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class UserCard extends Component {
   render() {
     let { user } = this.props;
+    let website = user.website.startsWith("http") ? user.website : `http://${user.website}`
     return (
       <UserContainer onClick={() => this.props.history.push(`/users/${user.username}`)}>
         <Img src={user.images["100"]} alt={user.display_name} />
@@ -12,7 +13,7 @@ class UserCard extends Component {
           <Name>{user.display_name}</Name>
           <div>{user.occupation}</div>
           <div>{user.city}, {user.country}</div>
-          <a href={user.website}>{user.website}</a>
+          <a href={website}>{user.website}</a>
         </UserDetail>
       </UserContainer>
     );
@@ -55,6 +56,5 @@ const Img = styled.img`
 `;
 
 const Name = styled.div.attrs({ className: "f3" }) ``;
-const Country = styled.div``;
 
 export default withRouter(UserCard);

@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import api from '../api';
 import UserHeader from './UserHeader';
 import Projects from './Projects';
-import Social from './Social';
 import WorkExperience from './WorkExperience';
-import { Loading, Column, Row } from '../styled';
+import { Loading, Row } from '../styled';
 import tooManyRequests from '../util/tooManyRequests.json';
 
 
@@ -64,7 +63,7 @@ class UserProfile extends Component {
 
   render() {
     let { user, projects, followers, following, work_experience, isLoading } = this.state;
-    if (isLoading) return <Loading>Loading...</Loading>
+    if (isLoading) return <Loading></Loading>
     return (
       <div>
         <Container>

@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Loading } from '../styled';
 
 const WorkExperience = ({ exp }) => {
-  if (!exp) return (<div>Loading Work Experience...</div>)
+  if (!exp) return (<Loading></Loading>)
   if (exp.length === 1) exp = exp[0].work_experience
   return (
     <Container>

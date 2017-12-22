@@ -5,7 +5,6 @@ import { Popover } from 'antd';
 import { Column, Row } from '../styled';
 
 const componentName = ({ user, followers, following }) => {
-  console.log(followers)
   return (
     <Container>
       <Row>
@@ -50,6 +49,7 @@ const componentName = ({ user, followers, following }) => {
                   <a href={f.url} key={f.id}>
                     <img src={f.images[50]} alt={f.display_name} />
                     <div>{f.display_name}</div>
+                    <hr />
                   </a>)}
               title="Following" >
               <Followers>Following {user.stats.following}</Followers>
@@ -57,7 +57,7 @@ const componentName = ({ user, followers, following }) => {
           </SpaceEvenly>
         </Column>
       </Column>
-    </Container >
+    </Container>
   );
 };
 
@@ -73,6 +73,10 @@ const SpaceEvenly = styled(Row) `
 const Details = styled.div`
   text-align: right;
   padding: 5px 10px;
+
+  > div {
+    
+  }
 `;
 
 const Logo = styled.div`
@@ -93,6 +97,9 @@ const Member = styled.div`
 
 const Followers = styled.div`
   padding: 5px 0;
+  color: #1890ff;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 export default componentName;

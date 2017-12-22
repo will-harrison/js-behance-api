@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
-import { Loading, Title } from '../styled';
+import { Loading, Title, Column } from '../styled';
 
 class Projects extends Component {
   constructor(props) {
@@ -37,20 +37,22 @@ class Projects extends Component {
     let { isLoading, projects } = this.state;
     return (
       <div>
-        {isLoading ? <Loading>Loading...</Loading> :
+        {isLoading ? <Loading></Loading> :
           <div>
             <Title>Projects</Title>
             <ProjectList>
               {projects.map(p => (
                 <a key={p.id} href={p.url}>
                   <Project>
-                    <ProjectName>{p.name}</ProjectName>
+                    <SColumn>
+                      <ProjectName>{p.name}</ProjectName>
+                    </SColumn>
                     <img src={p.covers[230]} alt={p.name} />
                     <Stats>
                       <div>{p.stats.views} Views</div>
                       <div>{p.stats.appreciations} Likes</div>
                     </Stats>
-                    <div>Published: {format(p.published_on * 1000, "MMM/D/YY")}</div>
+                    <div>Published {format(p.published_on * 1000, "MMM YYYY")}</div>
                   </Project>
                 </a>
               ))}
@@ -77,6 +79,11 @@ const ProjectList = styled.div`
 const Project = styled.div`
   width: calc(90vw / 4);
   margin: 25px 10px;
+`;
+
+const SColumn = styled(Column) `
+  justify-content: flex-end;
+  min-height: 65px;
 `;
 
 const ProjectName = styled.div.attrs({ className: "f4" }) ``;
