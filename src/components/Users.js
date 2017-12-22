@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import User from './UserCard';
 
 const Users = ({ users }) => {
+  if (!users) users = [];
   return (
     <div  >
       <Title>Browse Behance Users</Title>

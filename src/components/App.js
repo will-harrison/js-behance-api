@@ -25,7 +25,6 @@ class App extends Component {
 
   render() {
     let { users } = this.state;
-    console.log(users);
     return (
       <Container>
         <Search />

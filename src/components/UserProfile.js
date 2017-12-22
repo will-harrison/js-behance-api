@@ -5,6 +5,9 @@ import UserHeader from './UserHeader';
 import Projects from './Projects';
 import Social from './Social';
 import WorkExperience from './WorkExperience';
+import { Loading, Column, Row } from '../styled';
+import tooManyRequests from '../util/tooManyRequests.json';
+
 
 class UserProfile extends Component {
   constructor(props) {
@@ -12,51 +15,65 @@ class UserProfile extends Component {
 
     this.state = {
       user: {},
-      projects: {},
-      followers: {},
-      following: {},
-      work_experience: {},
-      isLoading: true
+      projects: [],
+      followers: [],
+      following: [],
+      work_experience: [],
+      isLoading: true,
+      testing: false
     }
   }
 
   componentDidMount() {
     let { id } = this.props.match.params;
-    api.users.getAllData(id).then(data => {
-      console.log(data)
-      data.map(d => {
-        if (d.http_code === 200) {
-          for (let key in d) {
-            if (key !== "http_code") {
-              this.setState(state => {
-                return {
-                  ...state,
-                  [key]: d[key],
-                  isLoading: false
-                };
-              });
+    if (this.state.testing) {
+      console.log("testing with tooManyRequests")
+      let { user, projects, following, followers, work_experience } = tooManyRequests;
+      this.setState(state => {
+        return {
+          ...state,
+          user,
+          projects,
+          followers,
+          following,
+          work_experience,
+          isLoading: false
+        }
+      })
+    } else {
+      console.log("pulling data")
+      api.users.getAllData(id).then(data => {
+        data.map(d => {
+          if (d.http_code === 200) {
+            for (let key in d) {
+              if (key !== "http_code") {
+                this.setState(state => {
+                  return {
+                    ...state,
+                    [key]: d[key],
+                    isLoading: false
+                  };
+                });
+              }
             }
           }
-        }
-      });
-    })
-
-    api.users.getUser(id).then(user => {
-
-    })
+        });
+      })
+    }
   }
 
   render() {
     let { user, projects, followers, following, work_experience, isLoading } = this.state;
+    if (isLoading) return <Loading>Loading...</Loading>
     return (
       <div>
-        {isLoading ? <div>Loading...</div> :
-          <Container>
-            <UserHeader user={user} />
-            <Projects projects={projects} />
-            <Social followers={followers} following={following} />
-            <WorkExperience experience={work_experience} />
-          </Container>
+        <Container>
+          <Row>
+            <UserHeader user={user} followers={followers} following={following} />
+            <WorkExperience exp={work_experience} />
+          </Row>
+          <Projects projects={projects} />
+        </Container>
         }
       </div>
     );

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import { format } from 'date-fns';
+import { Loading, Title } from '../styled';
 
 class Projects extends Component {
   constructor(props) {
@@ -6,7 +9,17 @@ class Projects extends Component {
     this.state = {
       projects: [],
       isLoding: true
-    }
+    };
+  }
+
+  componentDidMount() {
+    this.setState(state => {
+      return {
+        ...state,
+        projects: this.props.projects,
+        isLoading: false
+      };
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -15,8 +28,8 @@ class Projects extends Component {
         ...state,
         projects: nextProps.projects,
         isLoading: false
-      }
-    })
+      };
+    });
   }
 
 
@@ -24,16 +37,58 @@ class Projects extends Component {
     let { isLoading, projects } = this.state;
     return (
       <div>
-        {isLoading ? <div>Loading</div> :
+        {isLoading ? <Loading>Loading...</Loading> :
           <div>
-            {projects.map(p => (
-              <div>{p.name}</div>
-            ))}
+            <Title>Projects</Title>
+            <ProjectList>
+              {projects.map(p => (
+                <a key={p.id} href={p.url}>
+                  <Project>
+                    <ProjectName>{p.name}</ProjectName>
+                    <img src={p.covers[230]} alt={p.name} />
+                    <Stats>
+                      <div>{p.stats.views} Views</div>
+                      <div>{p.stats.appreciations} Likes</div>
+                    </Stats>
+                    <div>Published: {format(p.published_on * 1000, "MMM/D/YY")}</div>
+                  </Project>
+                </a>
+              ))}
+            </ProjectList>
           </div>
         }
       </div>
     );
   }
 }
+
+const ProjectList = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  > a {
+    color: #000;
+    text-decoration: none;
+  }
+`;
+
+const Project = styled.div`
+  width: calc(90vw / 4);
+  margin: 25px 10px;
+`;
+
+const ProjectName = styled.div.attrs({ className: "f4" }) ``;
+
+const Stats = styled.div.attrs({ className: "f6" }) `
+  display: flex;
+  flex-direction: row;
+
+  > div {
+    padding-right: 25px;
+  }
+`;
+
 
 export default Projects;
