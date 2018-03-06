@@ -37,6 +37,7 @@ const componentName = ({ user, followers, following }) => {
                   <a href={f.url} key={f.id}>
                     <img src={f.images[50]} alt={f.display_name} />
                     <div>{f.display_name}</div>
+                    <hr />
                   </a>)}
               title="Followers" >
               <Followers>{user.stats.followers} Followers</Followers>
@@ -62,8 +63,9 @@ const componentName = ({ user, followers, following }) => {
 };
 
 const Container = styled(Column) `
-  flex: 1;
+  flex: 2;
   padding-left: 50px;
+  align-self: center;
 `;
 
 const SpaceEvenly = styled(Row) `
@@ -73,10 +75,7 @@ const SpaceEvenly = styled(Row) `
 const Details = styled.div`
   text-align: right;
   padding: 5px 10px;
-
-  > div {
-    
-  }
+  
 `;
 
 const Logo = styled.div`

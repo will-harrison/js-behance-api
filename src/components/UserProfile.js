@@ -69,7 +69,7 @@ class UserProfile extends Component {
         <Container>
           <Row>
             <UserHeader user={user} followers={followers} following={following} />
-            <WorkExperience exp={work_experience} />
+            <WorkExperience experience={work_experience} />
           </Row>
           <Projects projects={projects} />
         </Container>

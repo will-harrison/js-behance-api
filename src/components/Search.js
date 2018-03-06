@@ -7,10 +7,11 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "denislomov",
+      userName: this.props.suggestedUser,
       error: false
     };
   }
+
 
   onInputChange = (e) => {
     e.persist();
@@ -50,7 +51,6 @@ class Search extends Component {
               name={"userName"}
               value={this.state.userName}
               onChange={this.onInputChange}
-              placeholder={"denislomov"}
               autoFocus />
           </div>
           <div>

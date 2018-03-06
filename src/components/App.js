@@ -25,9 +25,10 @@ class App extends Component {
 
   render() {
     let { users } = this.state;
+    let suggestedUser = users.length ? users[0].username : ''
     return (
       <Container>
-        <Search />
+        <Search suggested={suggestedUser} />
         <Users users={users} />
       </Container>
     );

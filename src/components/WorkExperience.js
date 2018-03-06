@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Loading } from '../styled';
 
-const WorkExperience = ({ exp }) => {
-  if (!exp) return (<Loading></Loading>)
-  if (exp.length === 1) exp = exp[0].work_experience
+const WorkExperience = ({ experience }) => {
+  console.log(experience)
+
   return (
     <Container>
-      {exp.map((e, i) => (
+      {experience.map((e, i) => (
         <ExpCard key={i}>
           <Position>{e.position}</Position>
           <Organization>{e.organization}</Organization>

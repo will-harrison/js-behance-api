@@ -79,6 +79,10 @@ const ProjectList = styled.div`
 const Project = styled.div`
   width: calc(90vw / 4);
   margin: 25px 10px;
+
+  @media (max-width: 700px) {
+    width: calc(90vw / 1)
+  }
 `;
 
 const SColumn = styled(Column) `
@@ -86,7 +90,11 @@ const SColumn = styled(Column) `
   min-height: 65px;
 `;
 
-const ProjectName = styled.div.attrs({ className: "f4" }) ``;
+const ProjectName = styled.div.attrs({ className: "f4" }) `
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
+`;
 
 const Stats = styled.div.attrs({ className: "f6" }) `
   display: flex;
